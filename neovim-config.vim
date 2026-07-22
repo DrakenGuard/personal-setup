@@ -4,10 +4,10 @@ Plug 'ellisonleao/gruvbox.nvim'
 
 call plug#end()
 
-set number
-set termguicolors
-set cursorline
-set clipboard+=unnamedplus
+set number			" shows the line number
+set termguicolors		" make colors pretty
+set cursorline			" highlights the line where the current cursor is
+set clipboard+=unnamedplus	" sets the default copy/paste to system clipboard
 
 let g:gruvbox_italic = 1
 
