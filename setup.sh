@@ -63,7 +63,7 @@ set_theme_gruvbox() {
 }
 
 main() {
-	echo "Configuring for vim"
+	printf "\nConfiguring for vim\n"
 	if [[ -f /usr/bin/vim ]]; then
 		install_vimplug vim
 		set_theme_gruvbox vim
@@ -71,9 +71,7 @@ main() {
 		echo "Vim not installed / Vim not found in '/usr/bin/vim'. Skipping config for vim..."
 	fi
 
-	echo ""
-
-	echo "Configuring for nvim"
+	printf "\nConfiguring for nvim\n"
 	if [[ -f /usr/bin/nvim ]]; then
 		install_vimplug neovim
 		set_theme_gruvbox neovim
@@ -81,7 +79,7 @@ main() {
 		echo "Neovim not installed / Neovim not found in '/usr/bin/nvim'. Skipping config for neovim..."
 	fi
 
-	echo "Setup complete!"
+	printf "\nSetup complete!\n"
 }
 
 main
