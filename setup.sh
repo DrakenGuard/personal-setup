@@ -7,7 +7,7 @@ if [[ "$OSTYPE" != "linux-gnu"* ]]; then
 	exit 1
 fi
 
-read -p "This script installs vim-plug for vim and neovim and sets the theme for both to gruvbox. Are you sure you want to continue? (y/N) " prompt
+read -p "This script installs vim-plug for vim and neovim and sets the theme for both to gruvbox. Are you sure you want to continue? (y/N) " prompt < /dev/tty
 
 if [[ ! $prompt == "y" && ! $prompt == "Y" ]]; then
 	echo "Exiting program"
