@@ -10,6 +10,8 @@ fi
 if [[ -z ${1+x} ]]; then
 	read -p "This script installs vim-plug for vim and neovim and sets the theme for both to gruvbox. Are you sure you want to continue? (y/N) " prompt < /dev/tty
 
+	echo ""
+
 	if [[ ! $prompt == "y" && ! $prompt == "Y" ]]; then
 		echo "Exiting program"
 		exit 0
@@ -62,7 +64,7 @@ set_theme_gruvbox() {
 	esac
 }
 
-set-custom-html() {
+set_custom_html() {
 	case $1 in
 		vim)
 			echo "Setting custom html configurations currently not supported in vim"
@@ -82,21 +84,26 @@ set-custom-html() {
 }
 
 main() {
-	printf "\nConfiguring for vim\n"
-	if [[ -f /usr/bin/vim ]]; then
+	read -p "Would you like for this script to configure vim? Note that any personal configurations you've done will be overridden by this script. (y/N) " prompt < /dev/tty
+
+	if [[ -f /usr/bin/vim && ($prompt == "y" || $prompt == "Y") ]]; then
+		printf "Configuring for vim...\n"
 		install_vimplug vim
 		set_theme_gruvbox vim
+		set_custom_html vim
 	else
-		echo "Vim not installed / Vim not found in '/usr/bin/vim'. Skipping config for vim..."
+		printf "Vim not installed / Vim not found in '/usr/bin/vim' / Cancelled. Skipping config for vim...\n\n"
 	fi
 
-	printf "\nConfiguring for nvim\n"
-	if [[ -f /usr/bin/nvim ]]; then
+	read -p "Would you like for this script to configure neovim? Note that any personal configurations you've done will be overridden by this script. (y/N) " prompt < /dev/tty
+
+	if [[ -f /usr/bin/nvim && ($prompt == "y" || $prompt == "Y") ]]; then
+		printf "Configuring for nvim...\n"
 		install_vimplug neovim
 		set_theme_gruvbox neovim
-		set-custom-html neovim
+		set_custom_html neovim
 	else
-		echo "Neovim not installed / Neovim not found in '/usr/bin/nvim'. Skipping config for neovim..."
+		printf "Neovim not installed / Neovim not found in '/usr/bin/nvim' / Cancelled. Skipping config for neovim...\n\n"
 	fi
 
 	printf "\nSetup complete!\n"
