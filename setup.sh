@@ -62,6 +62,25 @@ set_theme_gruvbox() {
 	esac
 }
 
+set-custom-html() {
+	case $1 in
+		vim)
+			echo "Setting custom html configurations currently not supported in vim"
+			;;
+		neovim)
+			read -p "Setting up custom html configurations on neovim (turns 4 spaces into 2 spaces). Do you want to continue? (Y/n) " prompt < /dev/tty
+			if [[ $prompt == "n" || $prompt == "N" ]]; then
+				echo "Cancelling neovim html configurations setup..."
+				return 0
+			fi
+			mkdir -p $HOME/.config/nvim/ftplugin
+			config=$HOME/.config/nvim/ftplugin/html.vim
+			curl "https://raw.githubusercontent.com/DrakenGuard/personal-setup/refs/heads/main/html.vim" > $config
+			echo "Html configurations setup on neovim is finished!"
+			;;
+	esac
+}
+
 main() {
 	printf "\nConfiguring for vim\n"
 	if [[ -f /usr/bin/vim ]]; then
@@ -75,6 +94,7 @@ main() {
 	if [[ -f /usr/bin/nvim ]]; then
 		install_vimplug neovim
 		set_theme_gruvbox neovim
+		set-custom-html neovim
 	else
 		echo "Neovim not installed / Neovim not found in '/usr/bin/nvim'. Skipping config for neovim..."
 	fi
