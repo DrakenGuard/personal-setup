@@ -2,6 +2,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'ellisonleao/gruvbox.nvim'	" terminal-friendly theme
 Plug 'mattn/emmet-vim'		" html+css generator
+" programming language parser for enhanced programming experience
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " telescope + dependency
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
@@ -34,4 +36,13 @@ colorscheme gruvbox
 " basic setup for telescope
 lua << EOF
 require('telescope').setup{}
+EOF
+
+" basic setup for treesitter
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "all" },
+  highlight = { enable = true },
+  indent = { enable = true },
+}
 EOF
