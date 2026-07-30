@@ -2,6 +2,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'ellisonleao/gruvbox.nvim'	" terminal-friendly theme
 Plug 'mattn/emmet-vim'		" html+css generator
+Plug 'stevearc/conform.nvim'	" formatter for neovim
 " programming language parser for enhanced programming experience
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate', 'branch': 'master'}
 " telescope + dependency
@@ -55,4 +56,15 @@ require('nvim-treesitter.configs').setup {
 	highlight = { enable = true },
 	indent = { enable = false },
 }
+EOF
+
+" basic setup for conform
+lua << EOF
+require('conform').setup({
+	formatters_by_ft = {
+		html = { "prettier" },
+		css = { "prettier" },
+		javascript = { "prettier" },
+	},
+})
 EOF
