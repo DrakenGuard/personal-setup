@@ -66,5 +66,13 @@ require('conform').setup({
 		css = { "prettier" },
 		javascript = { "prettier" },
 	},
+	format_on_save = {
+		timeout_ms = 500,
+		lsp_format = "fallback",
+	},
+	-- sets a keybind shortcut to format via <leader> f m
+	vim.keymap.set("n", "<leader>fm", function()
+		require("conform").format({ async = true })
+	end)
 })
 EOF
