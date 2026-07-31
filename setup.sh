@@ -83,6 +83,25 @@ set_custom_html() {
 	esac
 }
 
+set_custom_javascript() {
+	case $1 in
+		vim)
+			echo "Setting custom javascript configurations currently not supported in vim"
+			;;
+		neovim)
+			read -p "Setting up custom javascript configurations on neovim (turns 4 spaces into 2 spaces). Do you want to continue? (Y/n) " prompt < /dev/tty
+			if [[ $prompt == "n" || $prompt == "N" ]]; then
+				echo "Cancelling neovim javascript configurations setup..."
+				return 0
+			fi
+			mkdir -p $HOME/.config/nvim/ftplugin
+			config=$HOME/.config/nvim/ftplugin/javascript.vim
+			curl "https://raw.githubusercontent.com/DrakenGuard/personal-setup/refs/heads/main/javascript.vim" > $config
+			echo "Javascript configurations setup on neovim is finished!"
+			;;
+	esac
+}
+
 main() {
 	read -p "Would you like for this script to configure vim? Note that any personal configurations you've done will be overridden by this script. (y/N) " prompt < /dev/tty
 
@@ -91,6 +110,7 @@ main() {
 		install_vimplug vim
 		set_theme_gruvbox vim
 		set_custom_html vim
+		set_custom_javascript vim
 	else
 		printf "Vim not installed / Vim not found in '/usr/bin/vim' / Cancelled. Skipping config for vim...\n\n"
 	fi
@@ -102,6 +122,7 @@ main() {
 		install_vimplug neovim
 		set_theme_gruvbox neovim
 		set_custom_html neovim
+		set_custom_javascript neovim
 	else
 		printf "Neovim not installed / Neovim not found in '/usr/bin/nvim' / Cancelled. Skipping config for neovim...\n\n"
 	fi
