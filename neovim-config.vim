@@ -65,6 +65,8 @@ require('conform').setup({
 		html = { "prettier" },
 		css = { "prettier" },
 		javascript = { "prettier" },
+		python = { "prettier" },
+		c = { "prettier" }
 	},
 	format_on_save = {
 		timeout_ms = 500,
