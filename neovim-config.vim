@@ -24,6 +24,7 @@ set termguicolors		" make colors pretty
 set cursorline			" highlights the line where the current cursor is
 set clipboard+=unnamedplus	" sets the default copy/paste to system clipboard
 set spell			" adds spelling error checker
+set spelloptions=camel		" turns camelCasing as a valid spelling
 
 " autocomplete options
 " use :h completeopt to see what they do
